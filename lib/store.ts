@@ -12,11 +12,11 @@ export interface Product {
   image: string
   rating: number
   reviews: number
-  prepTime: string
+  prepTime: string | null // Can be null from DB
   serves: number
   tags: string[]
-  calories: string
-  category: string
+  calories: string | null // Can be null from DB
+  category: string | null // Can be null from DB
   popular: boolean
   createdAt: string
 }

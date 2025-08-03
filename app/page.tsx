@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Clock, Flame, Heart, MapPin, Phone, Instagram, Facebook, TwitterIcon as TikTok } from "lucide-react" // Changed Twitter to TikTok
+import { Clock, Flame, Heart, MapPin, Phone, Instagram, Facebook } from "lucide-react"
 import { ProductStore, type Product } from "@/lib/store"
 import { getSupabaseClient } from "@/lib/supabase"
 import Image from "next/image"
@@ -48,8 +48,14 @@ export default function RestaurantMenu() {
     {} as Record<string, Product[]>,
   )
 
-  // Sort categories alphabetically for consistent display
-  const sortedCategories = Object.keys(groupedProducts).sort()
+  // Custom sort order for categories
+  const sortedCategories = Object.keys(groupedProducts).sort((a, b) => {
+    if (a === "Main Items") return -1 // Main Items always first
+    if (b === "Main Items") return 1
+    if (a === "Add-Ons") return 1 // Add-Ons always last
+    if (b === "Add-Ons") return -1
+    return a.localeCompare(b) // Alphabetical for others
+  })
 
   if (loading) {
     return (
@@ -202,16 +208,29 @@ export default function RestaurantMenu() {
         <div className="max-w-7xl mx-auto px-4 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
           {/* Social Media */}
           <div className="flex gap-4">
-            <a href="#" className="bg-gray-800 hover:bg-blue-600 p-2 rounded-full transition-colors">
+            <a
+              href="https://www.facebook.com/share/1BKj1bhUg2/?mibextid=wwXIfr"
+              className="bg-gray-800 hover:bg-blue-600 p-2 rounded-full transition-colors"
+            >
               <Facebook className="h-5 w-5" />
             </a>
-            <a href="#" className="bg-gray-800 hover:bg-pink-600 p-2 rounded-full transition-colors">
+            <a
+              href="https://www.instagram.com/sugar_rushlb?igsh=NnVrOTV3dGVteTl5"
+              className="bg-gray-800 hover:bg-pink-600 p-2 rounded-full transition-colors"
+            >
               <Instagram className="h-5 w-5" />
             </a>
-            <a href="#" className="bg-gray-800 hover:bg-gray-700 p-2 rounded-full transition-colors">
-              {" "}
-              {/* Changed hover color */}
-              <TikTok className="h-5 w-5" /> {/* Changed icon */}
+            <a
+              href="https://www.tiktok.com/@sugar_rushlb?_t=ZS-8yWQuOffJYn&_r=1"
+              className="bg-gray-800 hover:bg-gray-700 p-2 rounded-full transition-colors flex items-center justify-center"
+            >
+              <Image
+                src="/images/tiktok-logo-circle.png" // Updated to new image path
+                alt="TikTok"
+                width={20} // Adjust size as needed
+                height={20} // Adjust size as needed
+                // Removed filter invert as the new image is already white on black
+              />
             </a>
           </div>
 

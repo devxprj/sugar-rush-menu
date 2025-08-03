@@ -116,11 +116,11 @@ export default function AdminDashboard() {
       description: product.description,
       price: product.price.toString(),
       originalPrice: product.originalPrice?.toString() || "",
-      prepTime: product.prepTime,
+      prepTime: product.prepTime ?? "", // Ensure string or empty string
       serves: product.serves.toString(),
       tags: product.tags.join(", "),
-      calories: product.calories,
-      category: product.category,
+      calories: product.calories ?? "", // Ensure string or empty string
+      category: product.category ?? "", // Ensure string or empty string
       popular: product.popular,
       image: product.image, // This will be the URL
     })
