@@ -25,7 +25,7 @@ export default function AdminDashboard() {
   const formRef = useRef<HTMLFormElement>(null)
 
   // IMPORTANT: Replace with your actual deployed menu URL
-  const menuUrl = "https://thesweetlife.shop" // <--- Update this line
+  const menuUrl = "https://www.thesweetlife.online" // <--- Updated this line
 
   // useActionState for add/edit form
   const [addEditState, addEditFormAction, isAddEditPending] = useActionState(
